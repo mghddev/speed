@@ -8,6 +8,7 @@ use mysql_xdevapi\Exception;
 use speed\Exception\BadRequestException;
 use speed\Exception\NotFoundException;
 use speed\Exception\SpeedServerException;
+use speed\Exception\UnauthorizedException;
 
 class SpeedGuzzleAPIClient implements iSpeedGuzzleAPIClient
 {
@@ -55,7 +56,7 @@ class SpeedGuzzleAPIClient implements iSpeedGuzzleAPIClient
      */
     public function getOrder(string $unique_code)
     {
-        $headers = ['Authorization' => 'bearer ' . $this->authorization_token];
+        $headers = ['Authorization' => 'Bearer ' . $this->authorization_token];
 
         $result = $this->http_client->request(
             'get',
@@ -75,19 +76,27 @@ class SpeedGuzzleAPIClient implements iSpeedGuzzleAPIClient
             );
         }
 
+        if ($result->getStatusCode() == 405) {
+            throw new BadRequestException(
+                sprintf('There is no response for code: %s', $unique_code)
+            );
+        }
+
+        $result_content_array = \GuzzleHttp\json_decode($result->getBody()->getContents(), true);
+
         if ($result->getStatusCode() == 400) {
-            throw new BadRequestException($result->getBody()->getContents());
+            throw new BadRequestException($result_content_array['Message']);
         }
 
         if ($result->getStatusCode() == 404) {
-            throw new NotFoundException($result->getBody()->getContents());
+            throw new NotFoundException($result_content_array['Message']);
         }
 
         if ($result->getStatusCode() == 500) {
-            throw new SpeedServerException($result->getBody()->getContents());
+            throw new SpeedServerException($result_content_array['Message']);
         }
 
-        throw new Exception($result->getBody()->getContents());
+        throw new Exception($result_content_array['Message']);
 
 
     }
@@ -95,12 +104,15 @@ class SpeedGuzzleAPIClient implements iSpeedGuzzleAPIClient
 
     /**
      * @param array $data
+     * @throws BadRequestException
      * @throws GuzzleException
+     * @throws SpeedServerException
+     * @throws UnauthorizedException
      */
     public function registerOrder(array $data)
     {
         $headers = [
-            'Authorization' => 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBdXRob3JpemF0aW9uIiwiZXhwIjoxNjA1MDM2MTA3LCJqdGkiOiI2ZDg0N2MzYy1kNzc0LTQ2YzUtOWIwOS0wY2M5ZTNhNjdmNWIiLCJpYXQiOiIxMS8xMS8yMDE5IDE0OjIxOjQ3IiwidmVyIjoiMC4yIiwiaWQiOiIxMjAwIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImF6a2lkb3Rjb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9CdXNpbmVzc093bmVySWQiOiIxIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ2xpZW50LEFQSUNhbGxlciIsIm5iZiI6MTU3MzQ4MjEwNywiaXNzIjoiaHR0cDovL2xvY2FsaG9zdC9nYXRld2F5L2xvZ2luIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdC9nYXRld2F5In0.KnEMzMyJItT7fgk9URs2MUTWsWs0Qufip4EZkc0M3XY',
+            'Authorization' => 'Bearer ' . $this->authorization_token,
             'Accept' => 'application/json'
         ];
 
@@ -114,7 +126,21 @@ class SpeedGuzzleAPIClient implements iSpeedGuzzleAPIClient
             ]
             );
 
-        var_dump($result->getStatusCode());
+        $result_content_array = \GuzzleHttp\json_decode($result->getBody()->getContents(), true);
+
+        if ($result->getStatusCode() == 401) {
+            throw new UnauthorizedException($result_content_array['Message']);
+        }
+
+        if ($result->getStatusCode() == 400) {
+            throw new BadRequestException($result_content_array['Message']);
+        }
+
+        if ($result->getStatusCode() == 500) {
+            throw new SpeedServerException($result_content_array['Message']);
+        }
+
+        var_dump($result->getStatusCode() . '____' . $result_content_array['Message']);
         die();
     }
 
