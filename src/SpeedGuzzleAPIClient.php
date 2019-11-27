@@ -74,8 +74,7 @@ class SpeedGuzzleAPIClient implements iSpeedGuzzleAPIClient
             return json_decode(
                 $result->getBody()->getContents(),
                 $assoc = true,
-                $depth = 512,
-                JSON_THROW_ON_ERROR
+                $depth = 512
             );
         }
 
