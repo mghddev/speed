@@ -1,10 +1,10 @@
 <?php
 namespace speed;
 
+use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
-use mysql_xdevapi\Exception;
 use speed\Exception\BadRequestException;
 use speed\Exception\NotFoundException;
 use speed\Exception\SpeedServerException;
@@ -53,6 +53,7 @@ class SpeedGuzzleAPIClient implements iSpeedGuzzleAPIClient
      * @throws GuzzleException
      * @throws NotFoundException
      * @throws SpeedServerException
+     * @throws UnauthorizedException
      */
     public function getOrder(string $unique_code)
     {
@@ -90,6 +91,10 @@ class SpeedGuzzleAPIClient implements iSpeedGuzzleAPIClient
             throw new BadRequestException($result_content_array);
         }
 
+        if ($result->getStatusCode() == 401) {
+            throw new UnauthorizedException('Token is expired');
+        }
+
         if ($result->getStatusCode() == 404) {
             throw new NotFoundException($result_content_array);
         }
@@ -98,7 +103,7 @@ class SpeedGuzzleAPIClient implements iSpeedGuzzleAPIClient
             throw new SpeedServerException($result_content_array);
         }
 
-        throw new Exception($result_content_array);
+        throw new Exception($result->getBody()->getContents());
 
     }
 

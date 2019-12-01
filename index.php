@@ -13,28 +13,28 @@ $token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBdXRob3JpemF0aW9uIiwiZ
 
 $client = new SpeedGuzzleAPIClient($token);
 
-var_dump($client->getOrder(8692063170));
-//$data = [
-//    "code"=> "125",
-//  "nationalId"=> "0012497797",
-//  "fullName"=> "Mohammad Ghaderi",
-//  "company"=> "",
-//  "phone"=> "02177477747",
-//  "mobile"=> "09128049107",
-//  "description"=> "nothing",
-//  "shift"=> 3,
-//  "cod"=> 150000,
-//  "hasReturn"=> false,
-//  "returnDetails"=> "",
-//  "location"=> [
-//      "postalCode"=> "1766744748",
-//      "address"=> "Address adress",
-//      "region"=> "8",
-//      "district"=> "narmak",
-//      "latitude"=> 35.731242,
-//      "longitude"=> 51.415501
-//  ],
-//  "deliveryDate"=> "2019-11-26T16:28:46.713Z"
-//];
-////
-//$client->registerOrder($data);
+//var_dump($client->getOrder(8692063170));
+$data = [
+    "code"=> "125",
+  "nationalId"=> "0012497797",
+  "fullName"=> "Mohammad Ghaderi",
+  "company"=> "",
+  "phone"=> "02177477747",
+  "mobile"=> "09128049107",
+  "description"=> "nothing",
+  "shift"=> 3,
+  "cod"=> 150000,
+  "hasReturn"=> false,
+  "returnDetails"=> "",
+  "location"=> [
+      "postalCode"=> "1766744748",
+      "address"=> "Address adress",
+      "region"=> "8",
+      "district"=> "narmak",
+      "latitude"=> 35.731242,
+      "longitude"=> 51.415501
+  ],
+  "deliveryDate"=> "2019-12-09T16:28:46.713Z"
+];
+//
+$client->registerOrder($data);
