@@ -1,9 +1,9 @@
 <?php
-namespace speed\Constant;
+namespace mghddev\speed\Constant;
 
 /**
  * Class SpeedPaymentCODStatus
- * @package speed\Constant
+ * @package mghddev\speed\Constant
  */
 class SpeedPaymentCODStatus
 {

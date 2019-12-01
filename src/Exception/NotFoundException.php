@@ -1,9 +1,9 @@
 <?php
-namespace speed\Exception;
+namespace mghddev\speed\Exception;
 
 /**
- * Class BadRequestException
- * @package speed\Exception
+ * Class NotFoundException
+ * @package mghddev\speed\Exception
  */
 class NotFoundException extends \Exception
 {

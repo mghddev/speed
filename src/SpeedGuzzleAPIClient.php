@@ -1,15 +1,19 @@
 <?php
-namespace speed;
+namespace mghddev\speed;
 
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
-use speed\Exception\BadRequestException;
-use speed\Exception\NotFoundException;
-use speed\Exception\SpeedServerException;
-use speed\Exception\UnauthorizedException;
+use mghddev\speed\Exception\BadRequestException;
+use mghddev\speed\Exception\NotFoundException;
+use mghddev\speed\Exception\SpeedServerException;
+use mghddev\speed\Exception\UnauthorizedException;
 
+/**
+ * Class SpeedGuzzleAPIClient
+ * @package mghddev\speed
+ */
 class SpeedGuzzleAPIClient implements iSpeedGuzzleAPIClient
 {
 

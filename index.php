@@ -1,6 +1,6 @@
 <?php
 
-use speed\SpeedGuzzleAPIClient;
+use mghddev\speed\SpeedGuzzleAPIClient;
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -37,4 +37,4 @@ $data = [
   "deliveryDate"=> "2019-12-09T16:28:46.713Z"
 ];
 //
-$client->registerOrder($data);
+var_dump($client->registerOrder($data));

@@ -1,6 +1,10 @@
 <?php
-namespace speed\Constant;
+namespace mghddev\speed\Constant;
 
+/**
+ * Class SpeedShift
+ * @package mghddev\speed\Constant
+ */
 class SpeedShift
 {
     const Shift_1 = 1;

@@ -1,6 +1,10 @@
 <?php
-namespace speed;
+namespace mghddev\speed;
 
+/**
+ * Interface iSpeedGuzzleAPIClient
+ * @package mghddev\speed
+ */
 interface iSpeedGuzzleAPIClient
 {
 
