@@ -124,25 +124,25 @@ class SpeedAPIClient implements iSpeedGuzzleAPIClient
     public function registerOrder(RegisterOrderVO $register_order_VO)
     {
         $data = [
-            "code"=> $register_order_VO->getCode(),
-            "nationalId"=> $register_order_VO->getNationalCode(),
-            "fullName"=> $register_order_VO->getFullName(),
-            "company"=> $register_order_VO->getCompany(),
-            "phone"=> $register_order_VO->getPhone(),
-            "mobile"=> $register_order_VO->getMobile(),
-            "description"=> $register_order_VO->getDescription(),
-            "shift"=> $register_order_VO->getShift(),
-            "cod"=> $register_order_VO->getCostOfDestination(),
-            "hasReturn"=> $register_order_VO->getHasReturn(),
-            "returnDetails"=> $register_order_VO->getReturnDetails(),
-            "deliveryDate"=> $register_order_VO->getDeliveryDate(),
+            "code" => $register_order_VO->getCode(),
+            "nationalId" => $register_order_VO->getNationalCode(),
+            "fullName" => $register_order_VO->getFullName(),
+            "company" => $register_order_VO->getCompany(),
+            "phone" => $register_order_VO->getPhone(),
+            "mobile" => $register_order_VO->getMobile(),
+            "description" => $register_order_VO->getDescription(),
+            "shift" => $register_order_VO->getShift(),
+            "cod" => $register_order_VO->getCostOfDestination(),
+            "hasReturn" => $register_order_VO->getHasReturn(),
+            "returnDetails" => $register_order_VO->getReturnDetails(),
+            "deliveryDate" => $register_order_VO->getDeliveryDate()->format('Y-m-d'),
             "location" => [
-                "postalCode"=> $register_order_VO->getLocation()->getPostalCode(),
-                "address"=> $register_order_VO->getLocation()->getAddress(),
-                "region"=> $register_order_VO->getLocation()->getRegion(),
-                "district"=> $register_order_VO->getLocation()->getDistrict(),
-                "latitude"=> $register_order_VO->getLocation()->getLatitude(),
-                "longitude"=> $register_order_VO->getLocation()->getLongitude()
+                "postalCode" => $register_order_VO->getLocation()->getPostalCode(),
+                "address" => $register_order_VO->getLocation()->getAddress(),
+                "region" => $register_order_VO->getLocation()->getRegion(),
+                "district" => $register_order_VO->getLocation()->getDistrict(),
+//                "latitude" => $register_order_VO->getLocation()->getLatitude(),
+//                "longitude" => $register_order_VO->getLocation()->getLongitude()
             ]
         ];
 

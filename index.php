@@ -25,8 +25,8 @@ $location_vo
 $register_vo = new \mghddev\speed\ValueObjects\RegisterOrderVO();
 $register_vo->setCode('125123')
     ->setNationalCode('0012497797')
+    ->setDeliveryDate(new DateTime('2020-12-29'))
     ->setFullName('test tespoor')
-    ->setCompany(null)
     ->setPhone('02177471667')
     ->setMobile('09128049107')
     ->setDescription('nothing')
