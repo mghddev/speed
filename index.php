@@ -15,32 +15,26 @@ $token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBdXRob3JpemF0aW9uIiwiZ
 $client = new SpeedAPIClient($token);
 
 //var_dump($client->getOrder(8692063170));
-$data = [
-    "code"=> "125123",
-  "nationalId"=> "0012497797",
-  "fullName"=> "Mohammad Ghaderi",
-  "company"=> "",
-  "phone"=> "02177477747",
-  "mobile"=> "09128049107",
-  "description"=> "nothing",
-  "shift"=> 3,
-  "cod"=> 150000,
-  "hasReturn"=> false,
-  "returnDetails"=> "",
-  "location"=> [
-      "postalCode"=> "1766744748",
-      "address"=> "Address adress",
-      "region"=> "8",
-      "district"=> "narmak",
-      "latitude"=> 35.731242,
-      "longitude"=> 51.415501
-  ],
-  "deliveryDate"=> "2020-01-29T16:28:46.713Z"
-];
+$location_vo = new \mghddev\speed\ValueObjects\LocationVO();
+$location_vo
+    ->setPostalCode('1766744748')
+    ->setAddress('this is address of mr test')
+    ->setRegion(8)
+    ->setDistrict('narmak');
+
+$register_vo = new \mghddev\speed\ValueObjects\RegisterOrderVO();
+$register_vo->setCode('125123')
+    ->setNationalCode('0012497797')
+    ->setFullName('test tespoor')
+    ->setCompany(null)
+    ->setPhone('02177471667')
+    ->setMobile('09128049107')
+    ->setDescription('nothing')
+    ->setShift(2)
+    ->setCostOfDestination(1478520)
+    ->setHasReturn(true)
+    ->setReturnDetails('poolo begir biar bizahmat')
+    ->setLocation($location_vo);
 //
-var_dump($client->registerOrder($data));
+var_dump($client->registerOrder($register_vo));
 //var_dump($client->getOrder('6474512367'));
-?>
-<html>
-<div id="stPwQkI"><script type="text/JavaScript" src="https://survey.porsline.ir/embed/stPwQkI/?height=100%;width=100%;border=none;"></script></div>
-</html>

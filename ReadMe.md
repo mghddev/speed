@@ -17,31 +17,30 @@ $token = '';
 $client = new SpeedGuzzleAPIClient($token);
 
 ###1) method registerOrder: this method uses to create an order 
-with below array as body of request:
-$data = [
-  "code"=> "125",
-  "nationalId"=> "12345678910",
-  "fullName"=> "Mohammad Ghaderi",
-  "company"=> "",
-  "phone"=> "02177477747",
-  "mobile"=> "09121234567",
-  "description"=> "nothing",
-  "shift"=> 3, //value of one of the const variable of SpeedShift class
-  "cod"=> 150000,
-  "hasReturn"=> false,
-  "returnDetails"=> "",
-  "location"=> [
-      "postalCode"=> "123456789",
-      "address"=> "Address adress",
-      "region"=> "8",
-      "district"=> "narmak",
-      "latitude"=> 35.731242,
-      "longitude"=> 51.415501
-  ],
-  "deliveryDate"=> "2019-11-26T16:28:46.713Z"
-];
+with below object as body of request:
 
-$response = $client->registerOrder($data);
+$location_vo = new \mghddev\speed\ValueObjects\LocationVO();
+$location_vo
+    ->setPostalCode('1777777777')
+    ->setAddress('this is address of mr test')
+    ->setRegion(8)
+    ->setDistrict('narmak');
+
+$register_vo = new \mghddev\speed\ValueObjects\RegisterOrderVO();
+$register_vo->setCode('125123')
+    ->setNationalCode('0012497797')
+    ->setFullName('test tespoor')
+    ->setCompany(null)
+    ->setPhone('02177777777')
+    ->setMobile('09127897897')
+    ->setDescription('nothing')
+    ->setShift(2)
+    ->setCostOfDestination(1478520)
+    ->setHasReturn(true)
+    ->setReturnDetails('poolo begir biar bizahmat')
+    ->setLocation($location_vo);
+
+$client->registerOrder($register_vo)
 
 ###2) method getOrder: this method uses to get order status with unique
  code that has been returned after register order by speed.

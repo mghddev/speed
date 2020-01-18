@@ -145,6 +145,7 @@ class SpeedAPIClient implements iSpeedGuzzleAPIClient
                 "longitude"=> $register_order_VO->getLocation()->getLongitude()
             ]
         ];
+
         $headers = [
             'Authorization' => "Bearer {$this->authorization_token}",
             'Content-Type' => 'application/json'
