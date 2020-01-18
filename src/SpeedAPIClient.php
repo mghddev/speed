@@ -9,12 +9,13 @@ use mghddev\speed\Exception\BadRequestException;
 use mghddev\speed\Exception\NotFoundException;
 use mghddev\speed\Exception\SpeedServerException;
 use mghddev\speed\Exception\UnauthorizedException;
+use mghddev\speed\ValueObjects\RegisterOrderVO;
 
 /**
  * Class SpeedGuzzleAPIClient
  * @package mghddev\speed
  */
-class SpeedGuzzleAPIClient implements iSpeedGuzzleAPIClient
+class SpeedAPIClient implements iSpeedGuzzleAPIClient
 {
 
     /**
@@ -113,15 +114,37 @@ class SpeedGuzzleAPIClient implements iSpeedGuzzleAPIClient
 
 
     /**
-     * @param array $data
+     * @param RegisterOrderVO $register_order_VO
      * @return mixed
      * @throws BadRequestException
      * @throws GuzzleException
      * @throws SpeedServerException
      * @throws UnauthorizedException
      */
-    public function registerOrder(array $data)
+    public function registerOrder(RegisterOrderVO $register_order_VO)
     {
+        $data = [
+            "code"=> $register_order_VO->getCode(),
+            "nationalId"=> $register_order_VO->getNationalCode(),
+            "fullName"=> $register_order_VO->getFullName(),
+            "company"=> $register_order_VO->getCompany(),
+            "phone"=> $register_order_VO->getPhone(),
+            "mobile"=> $register_order_VO->getMobile(),
+            "description"=> $register_order_VO->getDescription(),
+            "shift"=> $register_order_VO->getShift(),
+            "cod"=> $register_order_VO->getCostOfDestination(),
+            "hasReturn"=> $register_order_VO->getHasReturn(),
+            "returnDetails"=> $register_order_VO->getReturnDetails(),
+            "deliveryDate"=> $register_order_VO->getDeliveryDate(),
+            "location" => [
+                "postalCode"=> $register_order_VO->getLocation()->getPostalCode(),
+                "address"=> $register_order_VO->getLocation()->getAddress(),
+                "region"=> $register_order_VO->getLocation()->getRegion(),
+                "district"=> $register_order_VO->getLocation()->getDistrict(),
+                "latitude"=> $register_order_VO->getLocation()->getLatitude(),
+                "longitude"=> $register_order_VO->getLocation()->getLongitude()
+            ]
+        ];
         $headers = [
             'Authorization' => "Bearer {$this->authorization_token}",
             'Content-Type' => 'application/json'
