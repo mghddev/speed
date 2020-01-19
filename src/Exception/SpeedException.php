@@ -1,11 +1,13 @@
 <?php
 namespace mghddev\speed\Exception;
 
+
+use Exception;
+
 /**
- * Class UnauthorizedException
+ * Class SpeedException
  * @package mghddev\speed\Exception
  */
-class UnauthorizedException extends SpeedException
+class SpeedException extends Exception
 {
-
 }

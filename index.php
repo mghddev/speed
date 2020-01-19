@@ -36,5 +36,5 @@ $register_vo->setCode('125123')
     ->setReturnDetails('poolo begir biar bizahmat')
     ->setLocation($location_vo);
 //
-var_dump($client->registerOrder($register_vo));
-//var_dump($client->getOrder('6474512367'));
+//var_dump($client->registerOrder($register_vo));
+var_dump($client->getOrder('3896190918'));
