@@ -21,7 +21,7 @@ class SpeedAPIClient implements iSpeedGuzzleAPIClient
     /**
      * @var string
      */
-    protected $default_config = ['base_uri' => 'http://userapitest.speedapp.co'];
+    protected $default_config = ['base_uri' => 'http://userapi.speedapp.co'];
 
     /**
      * @var string
